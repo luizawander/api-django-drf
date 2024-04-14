@@ -31,6 +31,18 @@ def profissional_manage(request):
         except ValueError:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Parâmetro 'profissional' inválido."})
                 
+                
+    if request.method =='POST':        
+        new_profissional = request.data
+        serializer = ProfissionalSerializer(data=new_profissional)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+    return Response(status=status.HTTP_400_BAD_REQUEST)               
+                
+                
 
 @api_view(['GET'])  
 def get_consulta(request):
@@ -38,3 +50,30 @@ def get_consulta(request):
     serializer = ConsultaSerializer(consulta, many=True)
     return Response(serializer.data)
 
+
+@api_view(['GET','POST', 'PUT', 'DELETE'])    
+def consulta_manage(request):
+    if request.method == 'GET':
+        try: 
+            id_consulta = request.GET.get('consulta')
+            if id_consulta is not None:
+                try:
+                    consulta = Consulta.objects.get(pk=id_consulta)
+                    serializer = ConsultaSerializer(consulta) 
+                    return Response (serializer.data)
+                except Consulta.DoesNotExist:
+                    return Response(status=status.HTTP_404_NOT_FOUND)
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Parâmetro 'consulta' é obrigatório."})
+        except ValueError:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Parâmetro 'consulta' inválido."})
+
+
+    if request.method == 'POST':
+        serializer = ConsultaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response(status=status.HTTP_400_BAD_REQUEST)
