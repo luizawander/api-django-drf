@@ -55,6 +55,19 @@ def profissional_manage(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST) 
+    
+    
+    if request.method == 'DELETE':
+        id_prof = request.data.get('id_prof')
+        try:
+            profissional_to_delete = Profissional.objects.get(pk=id_prof)
+            profissional_to_delete.delete()
+            return Response(status=status.HTTP_202_ACCEPTED)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST) 
+            
+    
+            
                 
 
 
@@ -68,7 +81,6 @@ def get_consulta(request):
 
 @api_view(['GET','POST', 'PUT', 'DELETE'])    
 def consulta_manage(request):
-    
     if request.method == 'GET':
         try: 
             id_consulta = request.GET.get('consulta')
@@ -76,13 +88,14 @@ def consulta_manage(request):
                 try:
                     consulta = Consulta.objects.get(pk=id_consulta)
                     serializer = ConsultaSerializer(consulta) 
-                    return Response (serializer.data)
+                    return Response(serializer.data)
                 except Consulta.DoesNotExist:
                     return Response(status=status.HTTP_404_NOT_FOUND)
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Parâmetro 'consulta' é obrigatório."})
         except ValueError:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Parâmetro 'consulta' inválido."})
+
 
 
     if request.method == 'PUT': 
@@ -97,7 +110,8 @@ def consulta_manage(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
-    
+
+
 
     if request.method == 'POST':
         serializer = ConsultaSerializer(data=request.data)
@@ -105,5 +119,19 @@ def consulta_manage(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+
+    if request.method == 'DELETE':
+        id_consulta = request.data.get('id_consulta')
+        if id_consulta:
+            try:
+                consulta_to_delete = Consulta.objects.get(pk=id_consulta)
+                consulta_to_delete.delete()
+                return Response(status=status.HTTP_202_ACCEPTED)
+            except Consulta.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    return Response(status=status.HTTP_400_BAD_REQUEST)
