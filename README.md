@@ -51,9 +51,16 @@ Siga estas instruções para configurar e executar o projeto em seu ambiente loc
 
 Certifique-se de ter o Python e o Django instalados em seu sistema. Você também pode usar um ambiente virtual para isolar as dependências do projeto. </br>
 
- #### 0. Ativar o Ambiente Virtual (venv)
+### Clone o repositório
 
-Antes de executar os comandos relacionados ao projeto Django, ative o ambiente virtual `venv`. Dependendo do seu sistema operacional e do método de criação do ambiente virtual, os comandos podem variar. 
+   1. Clone este repositório para o seu ambiente local usando o seguinte comando:
+
+   ```bash
+   git clone https://github.com/luizawander/api-django-drf
+   ```
+ ### Ativar o Ambiente Virtual (venv)
+
+2. Antes de executar os comandos relacionados ao projeto Django, ative o ambiente virtual `venv`. Dependendo do seu sistema operacional e do método de criação do ambiente virtual, os comandos podem variar. 
 
 #### Windows
 
@@ -61,18 +68,9 @@ Antes de executar os comandos relacionados ao projeto Django, ative o ambiente v
 .\venv\Scripts\activate
 ````
 
-# Passos de Instalação
-
-### Clone o repositório
-
-   1. Clone este repositório para o seu ambiente local usando o seguinte comando:
-
-   ```bash
-   git clone https://github.com/luizawander/api-django-drf.git
-   ```
    ### Instale as Dependências
 
-2. Navegue até o diretório do projeto e instale as dependências listadas no arquivo `requirements.txt` usando o pip:
+3. Navegue até o diretório do projeto e instale as dependências listadas no arquivo `requirements.txt` usando o pip:
 
 ```bash
 cd api-django-drf
@@ -80,14 +78,14 @@ pip install -r requirements.txt
 ```
 ### Migrar Banco de Dados
 
-3. Execute as migrações para criar as tabelas do banco de dados:
+4. Execute as migrações para criar as tabelas do banco de dados:
 
 ```bash
 python manage.py migrate
 ```
 ### Executar o Servidor de Desenvolvimento
 
-4. Para iniciar o servidor de desenvolvimento Django, utilize o seguinte comando:
+5. Para iniciar o servidor de desenvolvimento Django, utilize o seguinte comando:
 
 ```bash
 python manage.py runserver
