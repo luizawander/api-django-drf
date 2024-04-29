@@ -1,7 +1,7 @@
 # Descrição do projeto.
 
-Esse projeto foi criado usando Django e Django Rest Framework. A API fornece endpoints para gerenciar informações sobre profissionais da área da saúde e consultas médicas. </br>
-Ele foi essencialmente pensado para que eu pudesse aplicar conceitos que eu já conhecia junto a novos conhecimentos que eu adquiri através da documentação do DRF. Portanto, há muitas coisas no código que devem ser melhoradas. 
+Projeto criado usando Django e Django Rest Framework. A API fornece endpoints para gerenciar informações sobre profissionais da área da saúde e consultas médicas. </br>
+Ele foi essencialmente pensado para que eu pudesse aplicar conceitos que eu já conhecia junto a novos conhecimentos que eu adquiri através da documentação do DRF. Portanto, há muitas coisas no código que DEVEM ser melhoradas. 
 
 ## Base URL
 
